@@ -1,0 +1,16 @@
+#placeholder1, #placeholder2 {
+  min-height: 20px;
+  padding: 19px;
+  margin: 0px 15px;
+  background-color: #9e7b7b;
+  border: 1px solid #9e7b7b;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+#showcase-app-code {
+  padding: 50px;
+  border: #ddd 8px solid;
+}
+
