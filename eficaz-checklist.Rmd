@@ -1,17 +1,17 @@
 ---
 title: "Eficaz - Checklist"
-author: "Autora: Jeanne Franco"
+author: "Autoria: Jeanne Franco"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output:
   html_document:
     toc: yes
     number_sections: no
     toc_float:
-      collapsed: yes
+      collapsed: no
     code_folding: show
     geometry: margin=9in
     highlight: tango
-    theme: journal
+    theme: !expr bslib::bs_theme()
     runtime: shiny
 ---
 
@@ -25,72 +25,70 @@ htmltools::img(src = knitr::image_uri("polvo.png"),
 
 ---
 
+```{css sidenote, echo = FALSE}
+.sidenote, .marginnote { 
+  float: right;
+  clear: right;
+  margin-right: -60%;
+  width: 57%;         # best between 50% and 60%
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  vertical-align: baseline;
+  position: relative;
+  }
+```
+
+---
+
 # Sobre o Eficaz Checklist
 
 Essa ferramenta foi desenvolvida para que você acompanhe sua **eficiência** nas atividades do trabalho, da faculdade, da escola ou de suas tarefas do dia a dia. Devido ao excesso de ofícios nos dias atuais se torna difícil acompanhar nossa **produtividade**, portanto, essa ferramenta ajudará você a **organizar suas obrigações** evitando desperdício de tempo, distrações ou pressa e possíveis erros na **conclusão das suas tarefas**.  
+
+---
 
 # Escolha da logo
 
 Essa logo foi escolhida...
 
-````{r message=FALSE, warning=FALSE, , out.width="50%", out.height="260", paged.print=FALSE, echo=FALSE, fig.align = 'center'}
-knitr::include_graphics("polvo.png") 
-```
+---
 
 # Sobre a autora
 
 Me chamo Jeanne Franco, sou graduada em ecologia, mestra em Ciências Florestais e estudante de doutorado em Ecologia pela Universidade Federal do Rio Grande do Norte. Sou coorganizadora da comunidade [R-Ladies Natal](https://www.instagram.com/rladiesnatal/?hl=pt-br) desde março de 2020. Essa comunidade pertence a uma [organização mundial](https://rladies.org/) com a missão encorajar, inspirar e capacitar gêneros sub-representados que utilizam o software R. Também faço parte da empresa [Beta Analítica](https://betaanalitica.com.br/) que tem a missão de obter soluções na gestão de dados e análises estatísticas para pessoas físicas, universidades e empresas.
 
-## Contato
+### Contato
    + [Github](https://github.com/francojra)
    + [LinkedIn](https://www.linkedin.com/in/jeanne-franco-13bab4b6/)
    + [Instagram](https://www.instagram.com/jeanneefranco/)
 
-# Tarefas
+---
 
-```{r echo=FALSE}
+# Inicie seu checklist!
+
+### Escola/Faculdade
+
+```{r echo=FALSE, warning=FALSE}
 library(shiny)
 
-navbarPage("Faculdade")
-
 inputPanel(
-  selectInput("n_breaks", label = "Semana do mês:",
-              choices = c(1, 2, 3, 4)))
+  selectInput("n_breaks", label = "Dia:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                          16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)),
+    selectInput("n_breaks", label = "Mês:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)))
 
 fluidPage(
-  ## link the JS file
-  tags$head(tags$script(src="script.js")),
-  ## link the CSS file
-  tags$head(tags$div(rel="stylesheet", 
-                      type="text/css",
-                      href="style.css")),
-  
-# Box para inserir o nome da atividade
-  textInput('txt1', 'Tarefa 1'),
-  tags$div(id = 'placeholder1'),
-  hr(),
 
-  textInput('txt1', 'Tarefa 2'),
-  tags$div(id = 'placeholder2'),
-  hr(),
-
-  textInput('txt1', 'Tarefa 3'),
-  tags$div(id = 'placeholder3'),
-  hr(),
-
-  textInput('txt1', 'Tarefa 4'),
-  tags$div(id = 'placeholder4'),
-  hr(),
-
-  textInput('txt1', 'Tarefa 5'),
-  tags$div(id = 'placeholder5'),
-  hr())
-
-sliderInput("n",
-            "Porcentagem de conclusão (%):",
-                  value = 0,
-                  min = 0,
-                  max = 100)
+  textInput('txt1', 'Tarefa 1'), 
+  textInput('txt2', 'Tarefa 2'),
+  textInput('txt3', 'Tarefa 3'),
+  textInput('txt4', 'Tarefa 4'),
+  textInput('txt5', 'Tarefa 5'),
+  textInput('txt5', 'Tarefa 6'),
+  textInput('txt5', 'Tarefa 7'),
+)
 
 server <- function(input, output) {
   output$Selected <- renderText({
@@ -102,7 +100,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       checkboxGroupInput("SelecetedVars", "Tarefas concluídas:",
-                         paste0("T",1:5), selected = "")
+                         paste0("T",1:7), selected = "")
     ),
     mainPanel(textOutput("Selected"))
     
@@ -110,14 +108,142 @@ ui <- fluidPage(
 )
     
 shinyApp(ui = ui, server = server)
-
-navbarPage("Trabalho")
 ```
 
+### Trabalho
 
+```{r echo=FALSE, warning=FALSE}
 
+inputPanel(
+  selectInput("n_breaks", label = "Dia:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                          16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)),
+    selectInput("n_breaks", label = "Mês:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)))
 
+fluidPage(
 
+  textInput('txt1', 'Tarefa 1'), 
+  textInput('txt2', 'Tarefa 2'),
+  textInput('txt3', 'Tarefa 3'),
+  textInput('txt4', 'Tarefa 4'),
+  textInput('txt5', 'Tarefa 5'),
+  textInput('txt5', 'Tarefa 6'),
+  textInput('txt5', 'Tarefa 7'),
+)
 
+server <- function(input, output) {
+  output$Selected <- renderText({
+    paste(input$SelecetedVars, collapse=", ")
+  })
+}
 
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      checkboxGroupInput("SelecetedVars", "Tarefas concluídas:",
+                         paste0("T",1:7), selected = "")
+    ),
+    mainPanel(textOutput("Selected"))
+    
+  )
+)
+    
+shinyApp(ui = ui, server = server)
+```
 
+### Atividades diárias
+
+```{r echo=FALSE, warning=FALSE}
+
+inputPanel(
+  selectInput("n_breaks", label = "Dia:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                          16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31)),
+    selectInput("n_breaks", label = "Mês:",
+              choices = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)))
+
+fluidPage(
+
+  textInput('txt1', 'Tarefa 1'), 
+  textInput('txt2', 'Tarefa 2'),
+  textInput('txt3', 'Tarefa 3'),
+  textInput('txt4', 'Tarefa 4'),
+  textInput('txt5', 'Tarefa 5'),
+  textInput('txt5', 'Tarefa 6'),
+  textInput('txt5', 'Tarefa 7'),
+)
+
+server <- function(input, output) {
+  output$Selected <- renderText({
+    paste(input$SelecetedVars, collapse=", ")
+  })
+}
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      checkboxGroupInput("SelecetedVars", "Tarefas concluídas:",
+                         paste0("T",1:7), selected = "")
+    ),
+    mainPanel(textOutput("Selected"))
+    
+  )
+)
+    
+shinyApp(ui = ui, server = server)
+```
+
+# Recompensas
+
+**Após finalizar** seus exercícios em cada categoria (escola, faculdade, trabalho e tarefas diárias), se dê uma recompensa, pois **você merece!**
+
+### Escola/Faculdade
+
+<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> Para fazer</label><br>
+<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+<label for="vehicle2"> Em andamento</label><br>
+<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+<label for="vehicle3"> Finalizado</label><br>
+
+```{r echo=FALSE, warning=FALSE}
+fluidPage(
+
+  textInput('txt1', 'Recompensa 1'))
+```
+
+### Trabalho
+
+<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> Para fazer</label><br>
+<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+<label for="vehicle2"> Em andamento</label><br>
+<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+<label for="vehicle3"> Finalizado</label><br>
+
+```{r echo=FALSE, warning=FALSE}
+fluidPage(
+
+  textInput('txt1', 'Recompensa 2'))
+```
+
+### Atividades diárias
+
+<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> Para fazer</label><br>
+<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+<label for="vehicle2"> Em andamento</label><br>
+<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+<label for="vehicle3"> Finalizado</label><br>
+
+```{r echo=FALSE, warning=FALSE}
+fluidPage(
+
+  textInput('txt1', 'Recompensa 3'))
+```
+
+```{r, echo = FALSE, warning=FALSE}
+bslib::bs_themer()
+thematic::thematic_shiny(font = "auto")
+```
